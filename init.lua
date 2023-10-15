@@ -276,6 +276,24 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Display whitespace characters
+vim.o.list = true
+vim.o.listchars = "tab:→ ,trail:~,lead:•"
+
+
+-- Folding
+--  Map <Space> to toggle folds
+-- vim.o.foldmethod = "indent"
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.keymap.set('n', '<Space>', 'za')
+
+-- Configure neoformat (Prettier)
+-- vim.g.neoformat_try_node_exe = 1
+-- vim.b.a l = ["prettier", "eslint"]
+
+-- vim.api.nvim_create_autocmd('BufWritePre', '*.js Neoformat')
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
