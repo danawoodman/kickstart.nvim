@@ -232,6 +232,12 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+--
+
+-- Configure tab size
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
 
 -- Set highlight on search
 vim.o.hlsearch = false
