@@ -39,7 +39,7 @@ function M.setup()
 
     --  Code formatting (Prettier)
     -- 'sbdchd/neoformat',
-    'dense-analysis/ale',
+    -- 'dense-analysis/ale',
 
     --
     -- Highlight marks
@@ -51,6 +51,26 @@ function M.setup()
       dependencies = {
         'kevinhwang91/promise-async'
       },
+    },
+
+    -- Support multiple select
+    {
+
+        "smoka7/multicursors.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            'smoka7/hydra.nvim',
+        },
+        opts = {},
+        cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+        keys = {
+                {
+                    mode = { 'v', 'n' },
+                    '<Leader>m',
+                    '<cmd>MCstart<cr>',
+                    desc = 'Create a selection for selected text or word under the cursor',
+                },
+            },
     },
 
     -- null-ls
@@ -216,7 +236,7 @@ function M.setup()
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --       These are some example plugins that I've included in the kickstart repository.
     --       Uncomment any of the lines below to enable them.
-    -- require 'kickstart.plugins.autoformat',
+    require 'kickstart.plugins.autoformat',
     -- require 'kickstart.plugins.debug',
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

@@ -1,17 +1,23 @@
 local M = {}
 
 function M.setup()
+  local k = vim.keymap
+
   --
   -- Comments
   --
-  -- vim.keymap.set('n', '<leader><Space>', 'za', { desc = 'Toggle comments' })
-  vim.keymap.set('n', '<leader><Space>', 'gcc', { desc =  'Toggle comments on line/selection' })
+  vim.keymap.set({'n', 'v'}, '<leader><Space>', 'gcc', { desc = 'Toggle comments on line/selection', remap = true })
+  vim.keymap.set('n', '<Space>', 'za')
 
   --
   -- Save and quit shortcuts
   --
-  vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
-  vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit file' })
+  vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save buffer' })
+  vim.keymap.set('n', '<leader>q', ':wq<CR>', { desc = 'Save buffer and quit' })
+  vim.keymap.set('n', '<leader>Q', ':q<CR>', { desc = 'Quit' })
+
+  -- Format file
+  vim.keymap.set('n', '<leader>f', ':format<CR>', { desc = 'Format file' })
 
   --
   -- Jump between previous buffers
@@ -75,9 +81,13 @@ function M.setup()
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
+    -- Go to
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
     nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+    -- Symbols
     nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
     nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
     nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
@@ -88,7 +98,6 @@ function M.setup()
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
     -- Lesser used LSP functionality
-    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
     nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
     nmap('<leader>wl', function()
